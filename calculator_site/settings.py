@@ -1,12 +1,12 @@
 # calculator_site/settings.py
 import os
+
+BASE_DIR = 'C:/Users/anast/Desktop/SF/IDE/Django_PostgreSQL/calculator_site'
+
 # Основные настройки URL для статических файлов
 STATIC_URL = '/static/'
-STATIC_ROOT = 'C:/Users/anast/Desktop/SF/IDE/Django_PostgreSQL/calculator_site/staticfiles/'  # Для collectstatic
-
-# Настройки медиа-файлов (если нужны)
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT = BASE_DIR + '/staticfiles/'  # Для collectstatic
+ROOT_URLCONF = 'calculator_site.urls'
 
 # Обязательные middleware (должны быть в таком порядке)
 MIDDLEWARE = [
@@ -30,7 +30,7 @@ INSTALLED_APPS = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR + '/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -42,7 +42,6 @@ TEMPLATES = [
         },
     },
 ]
-
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',  # Должен быть ПЕРВЫМ среди auth/messages
     'django.middleware.common.CommonMiddleware',
@@ -65,6 +64,8 @@ INSTALLED_APPS = [
 
 DEBUG = True
 
+TEMPLATE_DEBUG = DEBUG
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',  # Используем SQLite
@@ -72,21 +73,11 @@ DATABASES = {
     }
 }
 
-ROOT_URLCONF = 'calculator_site.urls'
-
-# Настройка БД (PostgreSQL)
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'mydatabase',       # Имя БД (например, из ElephantSQL)
-#         'USER': 'mydatabaseuser',   # Пользователь БД
-#         'PASSWORD': 'mypassword',   # Пароль
-#         'HOST': 'localhost',        # Или адрес от ElephantSQL/Render
-#         'PORT': '5432',
-#     }
-# }
 
 # Для аутентификации
 LOGIN_URL = 'login'  # Куда перенаправлять неавторизованных пользователей
 LOGIN_REDIRECT_URL = 'home'  # Куда перенаправлять после входа
 LOGOUT_REDIRECT_URL = 'home'  # Куда перенаправлять после выхода
+
+
+SECRET_KEY = 'l1w+_1-vd%h%9a70e+4x^et=$_us%&6f#@6=413&$lr71ty0-o'
